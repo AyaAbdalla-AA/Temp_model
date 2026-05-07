@@ -1,42 +1,32 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
-import pandas as pd
 import mlflow.pyfunc
-import os
+import pandas as pd
 
 app = FastAPI()
-
-MODEL_URI = 'model'
-model = None  # IMPORTANT: do NOT load at import time
-
 
 class PredictionInput(BaseModel):
     X_fahrenheit: float
 
+def predict_regression_model(uri, data):
+  model = mlflow.sklearn.load_model(uri)
+  return model.predict(data)
 
-def get_model():
-    """
-    Lazy load model to avoid CI import crashes
-    """
-    global model
-    if model is None:
-        model = mlflow.pyfunc.load_model(MODEL_URI)
-    return model
-
-
-@app.get("/health")
-def health():
-    return {"status": "ok"}
+@app.get("/")
+async def read_root():
+    return {"message": "Hello, World!"}
 
 
 @app.post("/predict")
-def predict(data: PredictionInput):
-    mdl = get_model()
+async def predict(data: PredictionInput):
+    # Convert input to DataFrame
+    features = pd.DataFrame([{
+        "X_fahrenheit": data.X_fahrenheit }])
+    url="C:\\Users\\LEGION\\Downloads\\mlflow1\\regression_artifacts\\4a67a96eabcb4d7fbd82240802e387f0\\artifacts\\model"
+    prediction = predict_regression_model(url, features)
 
-    df = pd.DataFrame([{
-        "X_fahrenheit": data.X_fahrenheit
-    }])
 
-    prediction = mdl.predict(df)
-
-    return {"prediction": prediction.tolist()}
+    return {
+        "prediction": prediction.tolist()
+    }
+# url = 'keras_artifacts/59a3729a0eed411a95fa84a9b3150361/artifacts/model'
