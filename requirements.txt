@@ -1,17 +1,13 @@
 fastapi
 uvicorn
 gunicorn
-mlflow
+mlflow==2.17.2
 pandas
-numpy
-
-# Deep learning (Keras model)
-tensorflow
-
-# API validation
+numpy==1.24.3
+tensorflow==2.13.0
+tensorflow-intel==2.13.0
 pydantic
 typing-extensions
-
-# Testing (CI)
 pytest
 httpx
+cloudpickle
