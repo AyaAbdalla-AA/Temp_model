@@ -1,35 +1,42 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
-import mlflow.pyfunc
 import pandas as pd
+import mlflow.pyfunc
+import os
 
 app = FastAPI()
 
+MODEL_URI = 'keras_artifacts/59a3729a0eed411a95fa84a9b3150361/artifacts/model'
+model = None  # IMPORTANT: do NOT load at import time
 
-def get_model(url):
-    return mlflow.pyfunc.load_model(url)
 
 class PredictionInput(BaseModel):
     X_fahrenheit: float
-    # feature2: float
-    # feature3: float
 
-@app.get("/")
-async def read_root():
-    return {"message": "Hello, World!"}
+
+def get_model():
+    """
+    Lazy load model to avoid CI import crashes
+    """
+    global model
+    if model is None:
+        model = mlflow.pyfunc.load_model(MODEL_URI)
+    return model
+
+
+@app.get("/health")
+def health():
+    return {"status": "ok"}
 
 
 @app.post("/predict")
-async def predict(data: PredictionInput):
-    # Convert input to DataFrame
-    features = pd.DataFrame([{
-        "X_fahrenheit": data.X_fahrenheit }])
-    url = 'keras_artifacts/59a3729a0eed411a95fa84a9b3150361/artifacts/model'
-    loaded_model =get_model(url)
-   
-    prediction = loaded_model.predict(pd.DataFrame(features))
+def predict(data: PredictionInput):
+    mdl = get_model()
 
+    df = pd.DataFrame([{
+        "X_fahrenheit": data.X_fahrenheit
+    }])
 
-    return {
-        "prediction": prediction.tolist()
-    }
+    prediction = mdl.predict(df)
+
+    return {"prediction": prediction.tolist()}
