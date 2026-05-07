@@ -22,7 +22,7 @@ async def predict(data: PredictionInput):
     # Convert input to DataFrame
     features = pd.DataFrame([{
         "X_fahrenheit": data.X_fahrenheit }])
-    url="C:\\Users\\LEGION\\Downloads\\mlflow1\\regression_artifacts\\4a67a96eabcb4d7fbd82240802e387f0\\artifacts\\model"
+    url="model"
     prediction = predict_regression_model(url, features)
 
 
