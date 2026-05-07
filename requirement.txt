@@ -1,0 +1,13 @@
+fastapi
+uvicorn
+gunicorn
+mlflow
+pandas
+numpy
+scikit-learn
+pydantic
+typing-extensions
+
+# testing
+pytest
+httpx
