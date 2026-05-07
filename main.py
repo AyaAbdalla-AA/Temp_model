@@ -6,7 +6,7 @@ import os
 
 app = FastAPI()
 
-MODEL_URI = 'keras_artifacts/59a3729a0eed411a95fa84a9b3150361/artifacts/model'
+MODEL_URI = 'model'
 model = None  # IMPORTANT: do NOT load at import time
 
 
