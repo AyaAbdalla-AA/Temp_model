@@ -11,16 +11,16 @@ def predict(temp):
     )
 
     result = response.json()
-    return result["prediction"]
+    return result["prediction"][0][0]
 
 
 # Gradio interface
 iface = gr.Interface(
     fn=predict,
-    inputs=gr.Number(label="Fahrenheit Temperature"),
+    inputs=gr.Slider(label="Fahrenheit Temperature", minimum=-10, maximum=60 , step=0.),
     outputs=gr.Textbox(label="Prediction"),
     title="🌡️ MLflow Temperature Predictor",
     description="Enter a temperature in Fahrenheit and get ML model prediction."
 )
 
-iface.launch(server_name="0.0.0.0", server_port=7860)
+iface.launch( share=True)
