@@ -1,14 +1,14 @@
 
 
-fastapi==0.110.0
-uvicorn==0.27.1
+fastapi
+uvicorn
 gunicorn
 
 mlflow==2.17.2
 pandas
-numpy==1.24.3
+numpy
 tensorflow==2.13.0
 
 pytest
-httpx==0.25.2
+httpx
 cloudpickle
