@@ -23,4 +23,4 @@ iface = gr.Interface(
     description="Enter a temperature in Fahrenheit and get ML model prediction."
 )
 
-iface.launch()
+iface.launch(server_name="0.0.0.0", server_port=7860)
