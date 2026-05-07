@@ -3,10 +3,10 @@
 fastapi
 uvicorn
 gunicorn
-
+pandas
 mlflow==2.17.2
 
-numpy
+
 scikit-learn
 
 pytest
