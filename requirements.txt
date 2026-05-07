@@ -4,7 +4,7 @@ fastapi
 uvicorn
 gunicorn
 pandas
-
+mlflow
 
 scikit-learn
 
