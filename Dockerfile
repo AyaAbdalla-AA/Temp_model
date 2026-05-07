@@ -20,6 +20,6 @@ EXPOSE 8000 7860
 
 # run both services using a simple script
 CMD ["bash", "-c", "\
-uvicorn main:app --host 0.0.0.0 --port 8000 & \
+uvicorn main:app --port 8000 & \
 python gradio_ui.py \
 "]
