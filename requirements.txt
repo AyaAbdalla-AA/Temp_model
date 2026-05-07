@@ -4,10 +4,14 @@ gunicorn
 mlflow
 pandas
 numpy
-scikit-learn
+
+# Deep learning (Keras model)
+tensorflow
+
+# API validation
 pydantic
 typing-extensions
 
-# testing
+# Testing (CI)
 pytest
 httpx
