@@ -4,3 +4,4 @@ pytest
 httpx==0.25.2
 pydantic
 typing-extensions>=4.8.0
+pandas
