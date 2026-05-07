@@ -1,6 +1,0 @@
-mlflow==2.17.2
-tensorflow==2.13.0
-numpy==1.24.3
-pandas
-cloudpickle
-typing-extensions==4.5.0
