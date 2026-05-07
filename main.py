@@ -5,7 +5,7 @@ import pandas as pd
 
 app = FastAPI()
 
-logged_model = 'keras_artifacts/59a3729a0eed411a95fa84a9b3150361/model'
+logged_model = 'keras_artifacts/59a3729a0eed411a95fa84a9b3150361/artifacts/model'
 loaded_model = mlflow.pyfunc.load_model(logged_model)
 
 
