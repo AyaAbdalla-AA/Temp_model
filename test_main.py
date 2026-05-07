@@ -5,6 +5,11 @@ client = TestClient(app)
 
 
 
+def test_health():
+    response = client.get("/health")
+    assert response.status_code == 200
+
+
 
 
 def test_predict():
@@ -15,3 +20,4 @@ def test_predict():
 
     assert response.status_code == 200
     assert "prediction" in response.json()
+
